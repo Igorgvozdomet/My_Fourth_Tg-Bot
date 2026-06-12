@@ -15,7 +15,7 @@ amount = 0
 def start(message):
     bot.send_message(
         message.chat.id,
-        'Добро пожаловать в конвертер валют! 💰\n\nВведите сумму для конвертации:'
+        'Добро пожаловать в конвертер валют! \n\nВведите сумму для конвертации:'
     )
     bot.register_next_step_handler(message, summa)
 
@@ -27,7 +27,7 @@ def summa(message):
     except ValueError:
         bot.send_message(
             message.chat.id,
-            '❌ Неверный формат. Введите число (например: 100)'
+            'Неверный формат. Введите число (например: 100)'
         )
         bot.register_next_step_handler(message, summa)
         return
@@ -43,13 +43,13 @@ def summa(message):
 
         bot.send_message(
             message.chat.id,
-            f'✅ Сумма: {amount}\n\nВыберите валютную пару:',
+            f'Сумма: {amount}\n\nВыберите валютную пару:',
             reply_markup=markup
         )
     else:
         bot.send_message(
             message.chat.id,
-            '❌ Число должно быть больше нуля. Повторите ввод суммы:'
+            'Число должно быть больше нуля. Повторите ввод суммы:'
         )
         bot.register_next_step_handler(message, summa)
 
@@ -69,7 +69,7 @@ def callback(call):
         except Exception as e:
             bot.send_message(
                 call.message.chat.id,
-                f'⚠️ Ошибка конвертации. Попробуйте другую пару.\n\nВведите новую сумму:'
+                f'Ошибка конвертации. Попробуйте другую пару.\n\nВведите новую сумму:'
             )
             bot.register_next_step_handler(call.message, summa)
     else:
@@ -96,13 +96,13 @@ def my_currency(message):
     except Exception:
         bot.send_message(
             message.chat.id,
-            '❌ Неверный формат или валютная пара.\n\nВведите пару через слэш, например: `USD/RUB`',
+            'Неверный формат или валютная пара.\n\nВведите пару через слэш, например: `USD/RUB`',
             parse_mode='Markdown'
         )
         bot.register_next_step_handler(message, my_currency)
 
 
 if __name__ == '__main__':
-    print('Конвертер валют запущен... 💰')
+    print('Конвертер валют запущен...')
     print('Команды: /start')
     bot.polling(none_stop=True)
